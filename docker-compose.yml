@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0000
+      POSTGRES_DB: home_energy_tracker
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
