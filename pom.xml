@@ -17,6 +17,7 @@
   <modules>
     <module>user-service</module>
     <module>device-service</module>
+    <module>ingestion-service</module>
   </modules>
 
   <properties>

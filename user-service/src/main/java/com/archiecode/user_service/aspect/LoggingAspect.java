@@ -22,7 +22,7 @@ public class LoggingAspect {
         log.info("Called Service Method: {}, with arguments {}", joinPoint.getSignature().getName(), joinPoint.getArgs());
     }
     @AfterReturning(pointcut = "serviceMethods()", returning = "result")
-    public void logAfetrReturning(JoinPoint joinPoint, Object result){
+    public void logAfterReturning(JoinPoint joinPoint, Object result){
         log.info(
                 "Service Method: {}, returned: {}", joinPoint.getSignature().getName(), result
         );
