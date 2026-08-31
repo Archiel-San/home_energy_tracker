@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0000
+      POSTGRES_PASSWORD: pgpwd
       POSTGRES_DB: home_energy_tracker
     ports:
       - "5432:5432"
