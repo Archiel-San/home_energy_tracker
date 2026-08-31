@@ -1,1 +1,0 @@
-CREATE DATABASE home_energy_tracker;
