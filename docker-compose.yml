@@ -101,6 +101,26 @@ services:
       DYNAMIC_CONFIG_ENABLED: 'true'
     restart: unless-stopped
 
+  influxdb:
+    image: influxdb:2.7
+    container_name: influxdb
+    ports:
+      - "8072:8086"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+      - DOCKER_INFLUXDB_INIT_ORG=archiecode
+      - DOCKER_INFLUXDB_INIT_BUCKET=usage-bucket
+      - DOCKER_INFLUXDB_INIT_RETENTION=1w
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-token
+    volumes:
+      - ./influxdb_data:/var/lib/influxdb2
+
 volumes:
   db-data:
-  kafka_data:
+  #kafka_data:
+  #bind mount - quando apontas o directorio que queres copiar para um directorio local
+  #esse de db-data o postgres cria um volume chamado db-data... tambem mostras o path que queres copiar
+  #o mais bonito é esse db-data mas o outro tmb serve
+
