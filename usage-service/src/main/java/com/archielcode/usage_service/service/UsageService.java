@@ -1,6 +1,8 @@
 package com.archielcode.usage_service.service;
 
 import com.archielcode.kafka.event.EnergyUsageEvent;
+import com.archielcode.usage_service.client.DeviceClient;
+import com.archielcode.usage_service.dto.DeviceDto;
 import com.archielcode.usage_service.model.DeviceEnergy;
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.QueryApi;
@@ -23,6 +25,7 @@ import java.util.List;
 public class UsageService {
 
     private final InfluxDBClient influxDBClient;
+    private final DeviceClient deviceClient;
 
     @Value("${influx.url}")
     private String influxUrl;
@@ -36,8 +39,9 @@ public class UsageService {
     @Value("${influx.org}")
     private String influxOrg;
 
-    public UsageService(InfluxDBClient influxDBClient){
+    public UsageService(InfluxDBClient influxDBClient, DeviceClient deviceClient){
         this.influxDBClient = influxDBClient;
+        this.deviceClient = deviceClient;
     }
 
     // timeseries DB
@@ -88,7 +92,13 @@ public class UsageService {
         log.info("Aggregated device energies over the past hour: {}", deviceEnergies);
 
         for (DeviceEnergy deviceEnergy: deviceEnergies){
-            //final DeviceDto deviceResponse = deviceClient
+            final DeviceDto deviceResponse = deviceClient.getDeviceById(deviceEnergy.getDeviceId());
+
+            if(deviceResponse == null | deviceResponse.id() == null){
+                log.warn("Device not found ");
+            }
+            deviceEnergy.setUserId(deviceResponse.userId());
+
         }
 
     }
