@@ -15,9 +15,10 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>user-service</module>
-    <module>device-service</module>
-    <module>ingestion-service</module>
+      <module>user-service</module>
+      <module>device-service</module>
+      <module>ingestion-service</module>
+      <module>usage-service</module>
   </modules>
 
   <properties>
