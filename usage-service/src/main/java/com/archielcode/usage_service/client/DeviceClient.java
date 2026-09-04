@@ -12,7 +12,6 @@ public class DeviceClient {
 
     private final RestTemplate restTemplate;
 
-    //@Value("${device.service.url}")
     private final String baseUrl;
 
     public DeviceClient (@Value("${device.service.url}")String baseUrl){
@@ -27,8 +26,8 @@ public class DeviceClient {
                 .buildAndExpand(deviceId)
                 .toUriString();
 
-        //ResponseEntity<DeviceDto> response = restTemplate.getForEntity(url, DeviceDto.class);
-        return null;//response.getBody();
+        ResponseEntity<DeviceDto> response = restTemplate.getForEntity(url, DeviceDto.class);
+        return response.getBody();
 
     }
 
