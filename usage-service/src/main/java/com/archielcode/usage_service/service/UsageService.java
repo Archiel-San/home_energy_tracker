@@ -60,9 +60,9 @@ public class UsageService {
     // timeseries DB
     @KafkaListener(topics = "energy-usage", groupId = "usage-service")
     public void energyUsageEvent(EnergyUsageEvent energyUsageEvent){
-        log.info("Received energy usage event: {}", energyUsageEvent);
+        //log.info("Received energy usage event: {}", energyUsageEvent);
 
-        Point point = Point.measurement("energy-usage")
+        Point point = Point.measurement("energy_usage")
                 .addTag("deviceId", String.valueOf(energyUsageEvent.deviceId()))
                 .addField("energyConsumed", energyUsageEvent.energyConsumed())
                 .time(energyUsageEvent.timestamp(), WritePrecision.MS);
@@ -70,7 +70,7 @@ public class UsageService {
         influxDBClient.getWriteApiBlocking().writePoint(influxBucket, influxOrg, point);
     }
 
-    @Scheduled(cron = "*10 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void aggregateDeviceEnergyUsage(){
         final Instant now = Instant.now();
         final Instant oneHourAgo = now.minusSeconds(1000);
