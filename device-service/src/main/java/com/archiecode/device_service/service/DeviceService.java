@@ -7,6 +7,8 @@ import com.archiecode.device_service.repository.DeviceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class DeviceService {
@@ -31,6 +33,11 @@ public class DeviceService {
         d.setUserId(deviceDto.userId());
         deviceRepository.save(d);
         return new DeviceDto(d);
+    }
+
+    public List<DeviceDto> getAllDevicesByUserId(Long userId){
+        List<Device> devices = deviceRepository.findAllByUserId(userId);
+        return devices.stream().map(DeviceDto::new).toList();
     }
 
 }
