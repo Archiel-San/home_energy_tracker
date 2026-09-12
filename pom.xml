@@ -21,6 +21,7 @@
       <module>usage-service</module>
       <module>alert-service</module>
       <module>insight-service</module>
+      <module>api-gateway</module>
   </modules>
 
   <properties>
