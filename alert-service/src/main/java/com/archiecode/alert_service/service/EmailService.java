@@ -26,7 +26,7 @@ public class EmailService {
         log.info("Sending email to: {}, subject: {}", to, subject);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setFrom("noreply@leetjourney.com");
+        message.setFrom("noreply@archiecode.com");
         message.setSubject(subject);
         message.setText(body);
 
