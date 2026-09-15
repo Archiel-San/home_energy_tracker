@@ -16,7 +16,7 @@ public class AlertService {
     }
 
 
-    @KafkaListener(topics = "energy-alerts", groupId = "aleer-service")
+    @KafkaListener(topics = "energy-alerts", groupId = "alert-service")
     public void energyUsageAlertEvent(AlertingEvent alertingEvent){
         log.info("Received Alert event. {}", alertingEvent);
 
